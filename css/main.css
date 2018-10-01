@@ -80,7 +80,7 @@ body {
     width: 140px;
   }
   .des{
-    font-size:10px;
+    font-size: .6em !important;
   }
 }
 
@@ -89,18 +89,12 @@ body {
     height: 190px;
     width: 190px;
   }
-  .des{
-    font-size:10px;
-  }
 }
 
 @media (min-width: 700px) {
   .card {
     height: 210px;
     width: 210px;
-  }
-  .des{
-    font-size:10px;
   }
 }
 
@@ -113,4 +107,18 @@ body {
 }
 .des{
   font-size:.9em;
+}
+.contenedor{
+    position: relative;
+    display: inline-block;
+}
+ 
+.texto-encima{
+    position: absolute;
+    top: 70px;
+    left: 50px;
+}
+.texto-encima p{
+  font-size: .5em;
+  text-shadow: 0px 0px 10px #000000;
 }
