@@ -58,6 +58,9 @@ body {
   background: rgba(42, 53, 58, 0.92);
   border-radius: 50%;
   visibility: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .link_action a {
@@ -70,8 +73,9 @@ body {
 }
 
 .card:hover .link_action a {
-  font-size: 5em;
+  font-size: 3em;
   transform: rotateZ(-30deg);
+  text-shadow: 1px 1px 6px #000;
 }
 
 @media (max-width: 375px) {
