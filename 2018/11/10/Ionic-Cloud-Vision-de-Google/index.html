@@ -10,6 +10,8 @@
 
     <!--Description-->
     
+        <meta name="description" content="En está ocasión estaremos viendo como crear una imitación de la aplicación “Not hot dog app” que aparece en la famosa serie silycon valley, por si aca">
+    
 
     <!--Author-->
     
@@ -18,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="JoralmoPro">
+        <meta property="og:title" content="Ionic + Cloud Vision de Google">
     
 
     <!--Open Graph Description-->
@@ -29,7 +31,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -40,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>JoralmoPro</title>
+    <title>Ionic + Cloud Vision de Google - JoralmoPro</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -117,17 +119,14 @@
     <div class="logo">
         <a href="/"><i class="logo-icon fa fa-terminal" aria-hidden="true"></i></a>
         
-            <h1 id="main-title" class="title">JoralmoPro</h1>
-        
     </div>
 </header>
 
         <section class="main">
             
-                
 <div class="post">
 
-    <div class="post-header index">
+    <div class="post-header">
         <h1 class="title">
             <a href="/2018/11/10/Ionic-Cloud-Vision-de-Google/">
                 Ionic + Cloud Vision de Google
@@ -142,9 +141,13 @@
         </div>
     </div>
 
-    
-        <div class="content">
-            <p>En está ocasión estaremos viendo como crear una imitación de la aplicación “Not hot dog app” que aparece en la famosa serie silycon valley, por si acaso no sabes cual es la aplicación te dejo un <a href="https://www.youtube.com/watch?v=pqTntG1RXSY" target="_blank" rel="noopener">link</a> para que le des un vistaso.</p>
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <p>En está ocasión estaremos viendo como crear una imitación de la aplicación “Not hot dog app” que aparece en la famosa serie silycon valley, por si acaso no sabes cual es la aplicación te dejo un <a href="https://www.youtube.com/watch?v=pqTntG1RXSY" target="_blank" rel="noopener">link</a> para que le des un vistaso.</p>
 <p>Para hacer posible la aplicación utilizaremos <a href="https://ionicframework.com/" target="_blank" rel="noopener">Ionic Framework</a> y el Api de Google <a href="https://cloud.google.com/vision/" target="_blank" rel="noopener">Cloud Vision</a>, por lo tanto lo primero que debemos hacer es instalar Ionic e iniciar un nuevo proyecto, lo conseguimos de la siguiente manera (infiero que tienes instalado <a href="https://nodejs.org/es/" target="_blank" rel="noopener">Node.js y npm</a>)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i ionic -g &amp;&amp; ionic start hotDogoNo blank</span><br></pre></td></tr></table></figure>
 <p>El primer comando instalara ionic de manera global en el sistema, el segundo iniciara un nuevo proyecto de ionic llamado hotDogoNo y con la plantilla blank, <a href="https://ionicframework.com/getting-started#cli" target="_blank" rel="noopener">acá</a> pueden ver más al respecto.</p>
@@ -175,149 +178,25 @@
 <p>Nos vemos en linea</p>
 </blockquote>
 
-        </div>
-    
-
-</div>
-            
-                
-<div class="post">
-
-    <div class="post-header index">
-        <h1 class="title">
-            <a href="/2018/11/07/Como-crear-un-chatbot-Node-js-y-DialogFlow/">
-                Como crear un chatbot - Node.js y DialogFlow
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-11-07</span>
-            
-            
-            
-        </div>
     </div>
 
     
-        <div class="content">
-            <h4 id="Bienvenido-a-este-post-donde-tratare-de-explicar-como-crear-un-bot-utilizando-DialogFlow-y-algunos-paquetes-de-npm-con-un-proyecto-de-Node-js-empecemos"><a href="#Bienvenido-a-este-post-donde-tratare-de-explicar-como-crear-un-bot-utilizando-DialogFlow-y-algunos-paquetes-de-npm-con-un-proyecto-de-Node-js-empecemos" class="headerlink" title="Bienvenido a éste post donde trataré de explicar como crear un bot utilizando DialogFlow y algunos paquetes de npm con un proyecto de Node.js, empecemos."></a>Bienvenido a éste post donde trataré de explicar como crear un bot utilizando DialogFlow y algunos paquetes de npm con un proyecto de Node.js, empecemos.</h4><h4 id="Primero-que-todo-veamos-que-es-DialogFlow-traducido-de-su-doc-oficial"><a href="#Primero-que-todo-veamos-que-es-DialogFlow-traducido-de-su-doc-oficial" class="headerlink" title="Primero que todo veamos que es DialogFlow (traducido de su doc. oficial):"></a>Primero que todo veamos que es DialogFlow (traducido de su doc. oficial):</h4><blockquote>
-<p>Ofrezca a los usuarios nuevas formas de interactuar con su producto creando interfaces de conversación atractivas basadas en texto y voz, como aplicaciones de voz y chatbots, con tecnología de AI. Conéctese con los usuarios de su sitio web, la aplicación móvil, el Asistente de Google, Amazon Alexa, Facebook Messenger y otras plataformas y dispositivos populares.</p>
-</blockquote>
-<h5 id="Habiendo-leido-un-poco-vemos-que-dialogflow-permite-crear-chatbots-de-manera-mas-sencilla-ofreciendonos-gran-cantidad-de-herramientas-para-facilitarnos-el-proceso"><a href="#Habiendo-leido-un-poco-vemos-que-dialogflow-permite-crear-chatbots-de-manera-mas-sencilla-ofreciendonos-gran-cantidad-de-herramientas-para-facilitarnos-el-proceso" class="headerlink" title="Habiendo leído un poco, vemos que dialogflow permite crear chatbots de manera más sencilla ofreciéndonos gran cantidad de herramientas para facilitarnos el proceso."></a>Habiendo leído un poco, vemos que dialogflow permite crear chatbots de manera más sencilla ofreciéndonos gran cantidad de herramientas para facilitarnos el proceso.</h5><p>Lo primero que debemos hacer es ir a la pagina de <a href="https://dialogflow.com/" target="_blank" rel="noopener">DialogFlow</a>, ir a la consola e iniciar sesión.</p>
-<p>luego estando en la consola, hacemos click en “Create a new agent”</p>
-<p><img src="/images/consolaDF.png" alt="Consola DialogFlow"></p>
-<p>le deberan poner un nombre, elegir un idioma y un proyecto de google asociado, para crear un nuevo proyecto de google elegir “Create a new Google project”</p>
-<p><img src="/images/nuevoBot.png" alt="Nuevo Agente"></p>
-<p>Al pulsar el crear tardará un momento mientras se prepara el nuevo agente por parte de google.</p>
-<p>Una vez creado tendremos 2 “Intents” creados, un Intent es lo que le permite al bot poder enterder una frase y saber como proceder, por ejemplo el intent “Default Welcome Intent” reconoce expresiones de usuario como</p>
-<p><img src="/images/welcomeIntent.png" alt="Welcome intent"></p>
-<p>a lo que respondería cosas como</p>
-<p><img src="/images/resWelcomeIntent.png" alt="Respuesta welcome intent"></p>
-<p>o sea que siempre que recibamos un mensaje de “Hola” por ejemplo, el bot contestará “¡Hola!” o alguna de las otras respuestas, lo podemos ver en el input “Try it now” de la parte superior derecha</p>
-<p><img src="/images/probandoIntent.png" alt="Probando intent"></p>
-<p>“user says” es lo que he dicho</p>
-<p>“Default response” es lo que me ha contestado</p>
-<p>“Intent” es el intent que ha procesado lo que el usuario ha dicho</p>
-<p>“Action” es la acción que se ha ejecutado dentro del input al recibir el mensaje de Hola.</p>
-<p>Tambien vemos que hay un intent llamado “Default Fallback Intent” que es el que se ejecuta cuando el usuario dice una frase que ningun intent puede procesar, a lo que el bot contestaría algo como “Ups, no he entendido a que te refieres.”, “¿Podrías repetirlo, por favor?” o “¿Disculpa?”.</p>
-<p>En esté tutorial buscaremos crear un bot que nos responda a cosas como:</p>
-<blockquote>
-<p>Usuario: ¿Cuánto es 2+2?</p>
-</blockquote>
-<blockquote>
-<p>Bot: 2+2 es 4</p>
-</blockquote>
-<blockquote>
-<p>Usuario: 2-2</p>
-</blockquote>
-<blockquote>
-<p>Bot: 2-2 es 0</p>
-</blockquote>
-<blockquote>
-<p>Usuario: 2*2</p>
-</blockquote>
-<blockquote>
-<p>Bot: 2*2 es 4</p>
-</blockquote>
-<p>Y así con la división; para lograr esto, debemos crear intents para manejar cada mensaje del usuario y darle el manejo respectivo a cada uno, para eso en el panel izquierdo, al lado de “Intents” hay un + para crear nuevos intents, clickeamos, le damos un nombre y luego guardar:</p>
-<p><img src="/images/nuevoIntent.png" alt="Nuevo Intent"></p>
-<p>Luego de creado clickeamos “Add Training Phrases” para entrenar al bot con frases dichas por el usuario, pero a diferencia de los dos intents antes mostrados este tendrá dos variables, num1 y num2 para saber a que numeros aplicarle la operación de suma y eso lo hacemos de la siguiente manera</p>
-<p><img src="/images/escribirFrase.png" alt="Escribir expresion"></p>
-<p>luego de escribir 2+2, seleccionamos el primer 2 y se despliega una ventanita</p>
-<p><img src="/images/ventanita.png" alt="Ventanita"></p>
-<p>en la que debemos elegir el tipo de dato de la variable, o tambien conocidos como “Entities”, pueden leer mas acerca de los tipos <a href="https://dialogflow.com/docs/reference/system-entities" target="_blank" rel="noopener">aquí</a>, para éste caso elegiremos @sys.number y le pondremos de nombre num1</p>
-<p><img src="/images/num1.png" alt="num1"></p>
-<p>y lo mismo con el otro número, quedando así</p>
-<p><img src="/images/num2.png" alt="num2"></p>
-<p>por último pulsamos enter, al agregar mas frases automáticamente se reconocerán las variables luego de pulsar enter, he agregado tres más</p>
-<p><img src="/images/masFrases.png" alt="Frases"></p>
-<p>En este caso no tendremos respuestas en el “Response” sino que manejaremos cada petición por medio de un <a href="https://es.wikipedia.org/wiki/Webhook" target="_blank" rel="noopener">webhook</a> que más adelante prepararemos, pero para esto debemos habilitar el “Fulfillment” en el intent, está al final solo clickeamos en “Enable Fulfillment” y luego en “Enable webhook call for this intent”.</p>
-<p><img src="/images/enableFulfillment.png" alt="Enable Fulfillment"></p>
-<p><img src="/images/enableWebhook.png" alt="Enable webhook"></p>
-<p>También debemos ponerle un nombre a la acción que se está ejecutando en ese intent para saber como manejarla, y colocar como requeridos los 2 parametros necesarios para dar una respuesta, en este caso num1 y num2, así</p>
-<p><img src="/images/actionIntent.png" alt="Action intent"></p>
-<p>Luego de todo esto es importante dar click en “Save” para guardar lo que hemos hecho, después de eso veremos unas alertas que dicen</p>
-<blockquote>
-<p>Intent saved</p>
-</blockquote>
-<blockquote>
-<p>Agent training started</p>
-</blockquote>
-<blockquote>
-<p>Agent training completed</p>
-</blockquote>
-<p>Lo que nos dicen que el intent se guardó, se empezó a entrenar el agente y luego que se terminó el entrenamiento, no podemos aún probar su funcionamiento pues no hemos preparado aun el webhook para poder dar una respuesta, y es aquí cuando entra al juego Node.js que es el que utilizaremos para hacer un servidor y manejar todas las solicitudes hechas al bot y poder dar una respuesta al usuario, veamos como.</p>
-<p>Lo primero es crear una carpeta (yo le pondré de nombre “botEjemplo”) y dentro de esta creamos un nuevo proyecto de node con </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
-<p><img src="/images/npmInit.png" alt="npm init -y"></p>
-<p>Seguido de eso instalaremos algunos paquetes para poder montar el servidor</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i body-parser express ngrok -D</span><br></pre></td></tr></table></figure>
-<p>Luego creamos el archivo index.js y lo abrimos en nuestro editor de codigo preferido y escribimos por el momento lo siguiente</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">"body-parser"</span>);</span><br><span class="line"><span class="keyword">const</span> ngrok = <span class="built_in">require</span>(<span class="string">'ngrok'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">3000</span>;</span><br><span class="line"><span class="keyword">var</span> ip = process.env.IP || <span class="string">"127.0.0.1"</span>;</span><br><span class="line"></span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (req.body.queryResult.action == <span class="string">"suma"</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num1 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num1);</span><br><span class="line">        <span class="keyword">let</span> num2 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num2);</span><br><span class="line">        <span class="keyword">let</span> sum = num1 + num2;</span><br><span class="line">        response = num1 + <span class="string">" + "</span> + num2 + <span class="string">" es "</span> + sum;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">            <span class="string">"fulfillmentText"</span>: response</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(port, ip);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="keyword">await</span> ngrok.connect(port);</span><br><span class="line">    <span class="built_in">console</span>.log(url);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>Para explicar un poco, el anterior código prepara un servidor con express, esto es porque al habilitar el webhook en dialogflow lo que pasará cada vez que le hagamos una pregunta al bot el dirigirá la petición a la url que le proporcionemos del webhook para procesar la pregunta y dar una respuesta, es por eso que instalamos <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a></p>
-<blockquote>
-<p>ngrok expone los servidores locales detrás de NAT y firewalls a la Internet pública a través de túneles seguros.</p>
-</blockquote>
-<p>todas estas solicitudes son enviadas a la raiz del servidor “/“ es por esto que es importante colocar un nombre a la acción del intent, para saber como manejarla dentro del servidor, dialogflow nos envía una serie de datos en cada solicitud, entre estas el “queryResult.action” que es donde viene la acción ejecutada desde ese intent, tambien “queryResult.parameters” que es donde vienen los parámetros que el usuario proporcionó en el mensaje, mas especificamente en esté caso los dos numeros (num1, num2) , luego de poner a escuchar el servidor ejecutamos una función para poner en “linea” nuestro servidor con ngrok, la url que nos aparecerá en consola luego de hacer “node index.js” es la que colocaremos de webhook en dialogflow así</p>
-<p><img src="/images/urlWebhook.png" alt="node index.js"></p>
-<p><img src="/images/webhookDialogflow.png" alt="Webhook DialogFlow"></p>
-<p>luego de habilitar el webhook bajamos y hacemos click en “Save” para guardar, luego de esto podemos probar el bot con la suma</p>
-<p><img src="/images/pruebaSuma.png" alt="Prueba suma"></p>
-<p>y ¡boom! el bot está funcionando, en la anterior captura se puede ver de nuevo lo enviado por el usuario, la respuesta (que hemos enviado desde el servidor de node), el intent, la acción y los parametros.</p>
-<p>Ahora de igual modo crearemos los intent para restar, multiplicar y dividir y agregaremos su respectiva funcionalidad en el código del servidor.</p>
-<p><img src="/images/restaIntent.png" alt="Resta Intent"></p>
-<p><img src="/images/multiplicacionIntent.png" alt="Multiplicación intent"></p>
-<p><img src="/images/divisionIntent.png" alt="División intent"></p>
-<h2 id="No-olvidar-colocar-el-nombre-de-la-accion-colocar-los-parametros-como-requeridos-y-activar-el-fulfillment"><a href="#No-olvidar-colocar-el-nombre-de-la-accion-colocar-los-parametros-como-requeridos-y-activar-el-fulfillment" class="headerlink" title="No olvidar colocar el nombre de la acción, colocar los parámetros como requeridos y activar el fulfillment"></a>No olvidar colocar el nombre de la acción, colocar los parámetros como requeridos y activar el fulfillment</h2><p>Y el código:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (req.body.queryResult.action == <span class="string">"suma"</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num1 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num1);</span><br><span class="line">        <span class="keyword">let</span> num2 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num2);</span><br><span class="line">        <span class="keyword">let</span> sum = num1 + num2;</span><br><span class="line">        response = num1 + <span class="string">" + "</span> + num2 + <span class="string">" es "</span> + sum;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">            <span class="string">"fulfillmentText"</span>: response</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(req.body.queryResult.action == <span class="string">"resta"</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num1 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num1);</span><br><span class="line">        <span class="keyword">let</span> num2 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num2);</span><br><span class="line">        <span class="keyword">let</span> sum = num1 - num2;</span><br><span class="line">        response = num1 + <span class="string">" - "</span> + num2 + <span class="string">" es "</span> + sum;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">            <span class="string">"fulfillmentText"</span>: response</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(req.body.queryResult.action == <span class="string">"multiplicacion"</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num1 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num1);</span><br><span class="line">        <span class="keyword">let</span> num2 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num2);</span><br><span class="line">        <span class="keyword">let</span> sum = num1 * num2;</span><br><span class="line">        response = num1 + <span class="string">" * "</span> + num2 + <span class="string">" es "</span> + sum;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">            <span class="string">"fulfillmentText"</span>: response</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(req.body.queryResult.action == <span class="string">"division"</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> num1 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num1);</span><br><span class="line">        <span class="keyword">let</span> num2 = <span class="built_in">parseFloat</span>(req.body.queryResult.parameters.num2);</span><br><span class="line">        <span class="keyword">let</span> sum = num1 / num2;</span><br><span class="line">        response = num1 + <span class="string">" / "</span> + num2 + <span class="string">" es "</span> + sum;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">            <span class="string">"fulfillmentText"</span>: response</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Guardamos y volvemos a correr el servidor</p>
-<h3 id="Importante-cambiar-la-url-del-fulfillment-cada-vez-que-corramos-el-servidor"><a href="#Importante-cambiar-la-url-del-fulfillment-cada-vez-que-corramos-el-servidor" class="headerlink" title="Importante cambiar la url del fulfillment cada vez que corramos el servidor"></a>Importante cambiar la url del fulfillment cada vez que corramos el servidor</h3><p>y de esté modo ya estária nuestro bot funcionando, de manera rápida haremos una integración con telegram para probar el bot de manera mas comoda.</p>
-<p>Lo primero es ir al apartado de “Integrations” en DialogFlow y habilitar Telegram, nos pedirá un token</p>
-<p><img src="/images/integracionTelegram.png" alt="Integranción telegram"></p>
-<p>Para conseguir este token debemos creal el bot en telegram, <a href="https://web.telegram.org/#/im?p=@BotFather" target="_blank" rel="noopener">aquí</a>, estando en el chat con el BotFather en telegram le escribimos</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/newbot</span><br></pre></td></tr></table></figure>
-<p>y nos preguntará el nombre del bot y el nombre de usuario del bot</p>
-<p><img src="/images/crearBot.png" alt="Crear Bot"></p>
-<p>nos resaltará el token en rojo, es el que pondremos en DialogFlow, lo pegamos y pulsamos start y listo ya tendremos la integración con telegram, probamos, para probar hay que iniciar la conversación con el bot en telegram, a mi bot le he puesto por nombre de usuario “EjemploJpBot” por lo tanto para poder iniciar la conversación con el debo ir a la url <a href="https://web.telegram.org/#/im?p=@EjemploJpBot" target="_blank" rel="noopener">https://web.telegram.org/#/im?p=@EjemploJpBot</a>, deberan editar la url con el nombre de usuario de su bot al final, al probar:</p>
-<p><img src="/images/pruebaBotTelegram.png" alt="Prueba bot Telegram"></p>
-<h3 id="Asegurarse-de-tener-corriendo-el-servidor-de-node-para-que-funcione-el-bot"><a href="#Asegurarse-de-tener-corriendo-el-servidor-de-node-para-que-funcione-el-bot" class="headerlink" title="Asegurarse de tener corriendo el servidor de node para que funcione el bot"></a>Asegurarse de tener corriendo el servidor de node para que funcione el bot</h3><p>Y listo, estó seria todo por esté tutorial, creo que son buenas bases para poder crear nuevas y mejores cosas con dialogflow, espero haberme explicado bien y que hayas entendido esté paso a paso.</p>
-<p><a href="https://github.com/Joralmo/botEjemplo" target="_blank" rel="noopener">Código del servidor</a></p>
-<blockquote>
-<p>¡Nos vemos en línea!</p>
-</blockquote>
 
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/javascript/">#javascript</a> <a href="/tags/programacion/">#programación</a> <a href="/tags/IoT/">#IoT</a> <a href="/tags/IA/">#IA</a> <a href="/tags/Cloud-Vision/">#Cloud Vision</a> <a href="/tags/Ionic/">#Ionic</a>
         </div>
     
 
+    <!-- Comments -->
+    
+
 </div>
-            
         </section>
+
     </div>
 </div>
-
-
-
-
 
 
 </div>
