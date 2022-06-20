@@ -14,7 +14,7 @@
   "app-b31bd921f93d150f6937.js.map": "app-b31bd921f93d150f6937.js.map",
   "app-cc9707ade7e1005aea6b.js.LICENSE.txt": "app-cc9707ade7e1005aea6b.js.LICENSE.txt",
   "app-cc9707ade7e1005aea6b.js.map": "app-cc9707ade7e1005aea6b.js.map",
-  "app.js": "app-b31bd921f93d150f6937.js",
+  "app.js": "app-cc9707ade7e1005aea6b.js",
   "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-28aec58e9efe628e752b.js.map": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-28aec58e9efe628e752b.js.map",
   "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-8808c802662c7d40acf3.js.map": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-8808c802662c7d40acf3.js.map",
   "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx.js": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-28aec58e9efe628e752b.js",
@@ -54,5 +54,5 @@
   "webpack-runtime-706b3db5b9c09a20bdb0.js.map": "webpack-runtime-706b3db5b9c09a20bdb0.js.map",
   "webpack-runtime-ad026e5067912e757663.js.map": "webpack-runtime-ad026e5067912e757663.js.map",
   "webpack-runtime-c6fc80026ddabc70f533.js.map": "webpack-runtime-c6fc80026ddabc70f533.js.map",
-  "webpack-runtime.js": "webpack-runtime-c6fc80026ddabc70f533.js"
+  "webpack-runtime.js": "webpack-runtime-58958642f4ba800c17d7.js"
 }
