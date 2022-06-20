@@ -67,3 +67,7 @@ public
 .idea
 .vscode
 .DS_Store
+
+#lock files
+*.lock
+*-lock.json
