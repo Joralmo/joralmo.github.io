@@ -96,7 +96,7 @@ app.Get("/users", func(c *fiber.Ctx) error {
 
 Corremos nuevamente el proyecto y vemos que nos devuelve un listado de usuarios aleatorios (la cantidad de usuarios varia en cada solicitud que enviamos).
 
-<img src="./test_endpoint_users.png" alt="Imagen de prueba de listado de usuarios" style="width: 100%;">
+![Imagen de prueba de listado de usuarios](./test_endpoint_users.png)
 
 Para añadirle un poco mas de complejidad al momento de hacer las pruebas de carga, vamos a añadir autenticación a nuestra api, utilizaremos jwt para esto, instalaremos los siguientes paquetes:
 
@@ -147,15 +147,15 @@ app.Use(jwtware.New(jwtware.Config{
 ```
 Una vez agregado el endpoint y el middleware corremos nuevamente el proyecto e intentamos de nuevo obtener los usuarios (sin ningún cambio aún) y vemos que nos devuelve un error.
 
-<img src="./error_token.png" alt="Imagen de prueba de listado de usuarios sin token" style="width: 100%;">
+![Imagen de prueba de listado de usuarios sin token](./error_token.png)
 
 Seguido haremos "inicio de sesión" y veremos que nos devuelve el token:
 
-<img src="./test_login_endpoint.png" alt="Imagen de prueba de login" style="width: 100%;">
+![Imagen de prueba de login](./test_login_endpoint.png)
 
 Volvemos a testear el endpoint de usuarios enviando el token y veremos que nos devuelve el listado de usuarios:
 
-<img src="./endpoint_users_with_token.png" alt="Imagen de prueba de listado de usuarios con token" style="width: 100%;">
+![Imagen de prueba de listado de usuarios con token](./endpoint_users_with_token.png)
 
 ---
 Esto sería todo por la parte de Go para nuestra api, el archivo `main.go`quedaría así:
