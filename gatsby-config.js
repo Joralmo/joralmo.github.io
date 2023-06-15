@@ -143,5 +143,13 @@ module.exports = {
         openAnalyzer: false,
       },
     },
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '2',
+        matomoUrl: 'https://joralmo.matomo.cloud/',
+        siteUrl: 'https://blog.joralmo.pro/',
+      }
+    }
   ].filter(Boolean),
 }
