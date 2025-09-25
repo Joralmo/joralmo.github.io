@@ -1,0 +1,213 @@
+---
+title: "Dos flujos con n8n + Evolution API en local (Docker): paso a paso básico"
+pubDate: 2025-09-25T12:00:00
+description: "Guía rápida para montar en local dos flujos: Presentación a nuevos contactos y Asistente personal que cotiza y envía PDF. n8n y Evolution API corriendo en Docker."
+tags:
+  - n8n
+  - whatsapp
+  - automatización
+  - docker
+  - openai
+slug: "/n8n-evolution-docker-flujos-basicos"
+canonicalUrl: https://www.noemec.net/blog/n8n-evolution-docker-flujos-basicos
+---
+
+> En esta guía montamos **dos flujos** con **n8n** y **Evolution API** en local (ambos con **Docker**), usando **OpenAI** para los textos:
+> 1) **Presentación Nuevos Contactos** (envía mensaje de presentación por WhatsApp).  
+> 2) **Asistente Personal** (entiende el mensaje del cliente, arma cotización y **envía un PDF** por WhatsApp).
+
+---
+
+## 0) Preparación (local con Docker)
+
+### n8n (Docker)
+Usa la imagen oficial:
+
+~~~bash
+docker run -d --name n8n \
+  -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  -e N8N_HOST=localhost \
+  -e N8N_EDITOR_BASE_URL=http://localhost:5678 \
+  n8nio/n8n:latest
+~~~
+
+### Evolution API (Docker)
+Levanta tu instancia de Evolution API (ajusta imagen y variables a tu build):
+
+~~~bash
+docker run -d --name evolution \
+  -p 8080:8080 \
+  -e AUTHENTICATION_API_KEY=TU_API_KEY \
+  <imagen_evolution_api>
+~~~
+
+> Conecta WhatsApp (QR) según la documentación de tu imagen y guarda `API_KEY` y `BASE_URL`.
+
+### Claves y credenciales en n8n
+- **OpenAI**: crea API key y añádela como credencial.
+- **Google Sheets** (si usas hoja): credencial OAuth2.
+- **Evolution API**: credencial con `BASE_URL` + `API_KEY`.
+
+---
+
+## 1) Flujo: **Presentación Nuevos Contactos**
+
+### Objetivo
+Tomar contactos (Nombre, Número) y **enviar por WhatsApp** un mensaje de presentación personalizado.
+
+### Estructura mínima de nodos
+1. **Manual Trigger** (o **Schedule** diario).  
+2. **Google Sheets → Read**: hoja `Contactos` con columnas `Nombre`, `Numero`.  
+3. *(Opcional)* **Google Sheets → Read**: hoja `Historial` para evitar duplicados.  
+4. *(Opcional)* **Code**: filtra solo números no presentes en `Historial`.  
+5. **OpenAI (Chat/Agent)**: genera **plantilla** de mensaje con marcador `//REPLACENAME//`.  
+6. **Split In Batches**: itera contacto por contacto.  
+7. **Evolution API → send-text**:
+   - **Número**:
+     ~~~twig
+     {{ String($json["Numero"]).replace(/\D/g,'') }}
+     ~~~
+     > Si tu instancia exige JID: `+ '@s.whatsapp.net'`.
+   - **Mensaje**:
+     ~~~twig
+     {{
+       $('GenerateMessage').first().json.output
+         .replace('//REPLACENAME//', $json["Nombre"])
+         .replace(/\*\*/g,'')
+         .replace(/[\r\n]+/g,' ')
+         .trim()
+     }}
+     ~~~
+8. *(Opcional)* **Google Sheets → Append** en `Historial` con el `Numero` enviado.
+
+### Prompt sugerido (OpenAI)
+~~~
+Redacta un mensaje corto, profesional y amable para presentarle mi emprendimiento a este contacto:
+
+Nombre: //REPLACENAME//
+
+El emprendimiento se llama **NoEMEC (No Es Magia, Es Código)**. Ayudamos a empresas y personas con soluciones a medida en software, IoT e innovación digital.
+Incluye web: https://www.noemec.net
+Tono: cercano y profesional.
+Deja el nombre con la marca //REPLACENAME// para reemplazar.
+~~~
+
+> Si Evolution devuelve “Invalid format”, elimina Markdown y saltos de línea como en la expresión de ejemplo.
+
+---
+
+## 2) Flujo: **Asistente Personal** (cotiza + PDF)
+
+### Objetivo
+Recibir mensajes por WhatsApp, interpretar intención y datos mínimos de cotización, **confirmar**, generar un **HTML** y convertirlo a **PDF** para enviarlo por WhatsApp.
+
+### Estructura mínima de nodos
+1. **Webhook (POST)** → recibe eventos entrantes (relay desde Evolution o tu gateway).  
+2. **Set** → variables útiles (`userNumber`, `userMessage`, etc.).  
+3. **OpenAI (Chat/Agent)** con **System Prompt** (responde **solo JSON** con el esquema simplificado).  
+4. **Code** → `JSON.parse` del `output` → objeto `chatGptResponse`.  
+5. **IF** `chatGptResponse.email.send == true`
+   - **Code** → construir **HTML** de cotización (simple).
+   - **HTTP Request** → servicio **HTML→PDF** (p.ej., Gotenberg/Chromium en local).
+   - **Evolution API → send-document** (adjunta el PDF).
+6. **Else** → **Evolution API → send-text** con `chatGptResponse.reply`.
+
+### System Prompt (esquema simplificado)
+- Mínimos para confirmar: `servicio`, `alcance`, `nombre`, y **uno** entre `email` o `telefono`.  
+- Normaliza `servicio` con sinónimos (`web`, `apps_movil`, `analisis_datos`, `audiovisual`, `iot`, `gerencia_proyectos`).  
+- Estados: `collecting → confirming → confirmed → cancelled`.  
+- Responde **solo JSON** válido; nada de texto extra.
+
+### Code (HTML mínimo para PDF)
+~~~js
+const data = $json.chatGptResponse || $json;
+
+const escape = (s='') => String(s)
+ .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+ .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+const mapServicio = (code) => ({
+  apps_movil:'Desarrollo de Apps Móviles',
+  web:'Desarrollo Web',
+  analisis_datos:'Análisis de Datos',
+  audiovisual:'Producción Audiovisual',
+  iot:'Soluciones IoT',
+  gerencia_proyectos:'Gerencia de Proyectos TI'
+}[code] || 'Servicio');
+
+const p = data.project || {};
+const empresa  = p.empresa || '—';
+const email    = p.email   || data.email?.to || '—';
+const telefono = p.telefono|| '—';
+const alcance  = p.alcance || 'Alcance por confirmar';
+const servicio = mapServicio(p.servicio || 'web');
+const precio   = (data.email && data.email.costo_estimado) ? data.email.costo_estimado : (p.presupuesto || 0);
+
+const precioFmt = new Intl.NumberFormat('es-CO', {style:'currency', currency:'COP', maximumFractionDigits:0}).format(Number(precio));
+const fecha = new Date().toLocaleDateString('es-CO', {year:'numeric', month:'long', day:'numeric'});
+
+const html = `<!doctype html><html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cotización - ${escape(empresa)}</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:800px;margin:0 auto;padding:40px;color:#111}
+h1,h2{color:#2563eb;margin:0 0 12px}
+.section{border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin:16px 0;background:#fafafa}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kv b{color:#374151}
+.price{font-size:28px;font-weight:bold;color:#b45309}
+.footer{margin-top:24px;color:#6b7280;text-align:center}
+a{color:#2563eb;text-decoration:none}
+</style>
+</head><body>
+<div style="text-align:right;color:#6b7280">Fecha: ${escape(fecha)}</div>
+<h1>COTIZACIÓN</h1>
+<div class="section">
+  <h2>Información del Cliente</h2>
+  <div class="kv">
+    <div><b>Empresa</b><br>${escape(empresa)}</div>
+    <div><b>Email</b><br>${escape(email)}</div>
+    <div><b>Teléfono</b><br>${escape(telefono)}</div>
+    <div><b>Servicio</b><br>${escape(servicio)}</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Detalles del Proyecto</h2>
+  <p>${escape(alcance)}</p>
+</div>
+
+<div class="section" style="text-align:center">
+  <h2>Inversión estimada</h2>
+  <div class="price">${escape(precioFmt)}</div>
+  <div>Pesos Colombianos</div>
+</div>
+
+<div class="footer">
+  <strong>NOEMEC — No es Magia, Es Código</strong><br/>
+  🌐 <a href="https://www.noemec.net" target="_blank">www.noemec.net</a>
+</div>
+</body></html>`;
+
+return [{ json: { html } }];
+~~~
+
+> Envía `json.html` a tu convertidor **HTML→PDF** (por ejemplo, Gotenberg en `http://host.docker.internal:3000/forms/chromium/convert/html`) y adjunta el PDF desde Evolution con `send-document`.
+
+---
+
+## 3) Pruebas rápidas
+
+- **Flujo 1**: agrega 1–2 filas de prueba (Nombre/Numero), ejecuta y verifica que lleguen mensajes.  
+- **Flujo 2**: envía desde WhatsApp:  
+  - “Hola, quiero una *landing page*. Mi correo es …” → si falta **alcance**, el bot debe pedirlo.  
+  - “Confirmo” → pasa a **confirmed**, genera PDF y lo envía.
+
+---
+
+## 4) Notas finales
+
+- Todo corre **en local** con Docker (n8n y Evolution API).  
+- **OpenAI** se usa para redacción/JSON; minimiza prompts para abaratar.  
+- Si Evolution marca `Invalid format`, envía **texto plano** (sin Markdown ni saltos) y valida que el **número** esté en E.164 (solo dígitos).
