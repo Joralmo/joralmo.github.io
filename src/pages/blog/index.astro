@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import BackToTop from '../../components/BackToTop.astro';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
@@ -18,7 +19,7 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main id="main-content">
 			<section class="hero">
 				<p class="kicker">Archivo</p>
 				<h1>Todos los artículos publicados</h1>
@@ -27,6 +28,7 @@ const posts = (await getCollection('blog')).sort(
 			<PostList posts={posts} />
 		</main>
 		<Footer />
+		<BackToTop />
 	</body>
 </html>
 
@@ -39,7 +41,7 @@ const posts = (await getCollection('blog')).sort(
 	.lead {
 		max-width: 640px;
 		margin: 0;
-		color: rgba(255, 232, 223, 0.75);
+		color: rgba(var(--text), 0.75);
 	}
 	@media (max-width: 720px) {
 		.hero {

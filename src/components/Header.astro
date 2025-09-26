@@ -1,16 +1,25 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header>
+<header role="banner">
+	<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 	<div class="inner">
 		<a class="brand" href="/">{SITE_TITLE}</a>
-		<nav>
-			<HeaderLink href="/">Posts</HeaderLink>
-			<HeaderLink href="/blog">Archivo</HeaderLink>
-			<HeaderLink href="/about">Nosotros</HeaderLink>
-			<a class="contact" href="mailto:info@noemec.net">Contacto</a>
+		<nav aria-label="Navegación principal" role="navigation">
+			<div class="nav-links">
+				<HeaderLink href="/">Posts</HeaderLink>
+				<HeaderLink href="/blog">Archivo</HeaderLink>
+				<HeaderLink href="/about">Nosotros</HeaderLink>
+			</div>
+			<div class="nav-actions">
+				<ThemeToggle />
+				<a class="contact" href="mailto:info@noemec.net" aria-label="Contactar por correo electrónico">
+					Contacto
+				</a>
+			</div>
 		</nav>
 	</div>
 </header>
@@ -19,9 +28,9 @@ import HeaderLink from './HeaderLink.astro';
 		position: sticky;
 		top: 0;
 		z-index: 10;
-		background: rgba(27, 20, 19, 0.92);
+		background: var(--header-bg);
 		backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--surface-border);
+		border-bottom: 1px solid var(--surface-card-border);
 	}
 	.inner {
 		width: min(1100px, calc(100% - 3rem));
@@ -38,46 +47,77 @@ import HeaderLink from './HeaderLink.astro';
 		font-size: 1rem;
 		letter-spacing: 4px;
 		text-transform: uppercase;
-		color: rgba(255, 210, 200, 0.9);
+		color: var(--header-brand);
 	}
 	nav {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: 1.5rem;
+	}
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
 	}
 	nav :global(a) {
-		padding: 0.5rem 0.9rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.2rem;
+		min-height: 3rem;
 		border-radius: 999px;
 		font-size: 0.95rem;
-		color: rgba(255, 231, 223, 0.85);
+		color: var(--header-link);
+		background: var(--header-link-bg);
+		border: 1px solid transparent;
 		text-decoration: none;
 		transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 	}
 	nav :global(a:hover),
-	nav :global(a.active) {
-		background: var(--accent-soft);
-		color: var(--accent-strong);
+	nav :global(a.active),
+	nav :global(a:focus-visible) {
+		background: var(--header-link-active-bg);
+		color: var(--header-link-active-text);
+		border-color: var(--header-link-active-bg);
 		transform: translateY(-1px);
 	}
 	.contact {
-		background: var(--accent);
-		color: #1b1413;
+		background: var(--cta-bg);
+		color: var(--cta-text);
 		font-weight: 700;
 		box-shadow: 0 12px 30px rgba(242, 131, 125, 0.35);
 	}
-	.contact:hover {
-		background: var(--accent-strong);
-		color: #1b1413;
+	.contact:hover,
+	.contact:focus-visible {
+		background: var(--cta-hover-bg);
+		color: var(--cta-text);
 	}
 	@media (max-width: 720px) {
 		.inner {
 			flex-direction: column;
-			align-items: flex-start;
+			align-items: stretch;
 			padding: 1rem 0 1.2rem;
+			gap: 1rem;
+		}
+		header {
+			padding: 0 1rem;
 		}
 		nav {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0.75rem;
+		}
+		.nav-links {
 			flex-wrap: wrap;
 			gap: 0.5rem;
+		}
+		.nav-actions {
+			justify-content: flex-start;
 		}
 	}
 </style>

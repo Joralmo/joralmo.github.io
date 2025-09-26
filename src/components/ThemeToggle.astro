@@ -1,0 +1,99 @@
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  aria-pressed="false"
+  aria-label="Cambiar entre modo claro y oscuro"
+>
+  <span class="theme-toggle__icon" data-icon aria-hidden="true">🌙</span>
+  <span class="theme-toggle__text" data-status>Cambiar a modo claro</span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    min-height: 3rem;
+    border-radius: 999px;
+    border: 1px solid var(--pill-border);
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    background: var(--accent-soft);
+    border-color: var(--border-strong);
+    color: var(--accent-strong);
+  }
+
+  .theme-toggle:active {
+    transform: translateY(1px);
+  }
+
+  .theme-toggle__icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+</style>
+
+<script is:inline>
+  const storageKey = 'theme-preference';
+  const root = document.documentElement;
+  const button = document.currentScript?.previousElementSibling;
+
+  if (button) {
+    const icon = button.querySelector('[data-icon]');
+    const status = button.querySelector('[data-status]');
+
+    const getPreference = () => {
+      if (root.dataset.theme) return root.dataset.theme;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    };
+
+    const updateUI = (theme) => {
+      if (status) status.textContent = theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro';
+      if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+      button.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      button.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    };
+
+    const applyTheme = (theme) => {
+      root.dataset.theme = theme;
+      updateUI(theme);
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch (error) {
+        /* ignore storage failures */
+      }
+    };
+
+    const initialTheme = getPreference();
+    updateUI(initialTheme);
+
+    button.addEventListener('click', () => {
+      const current = root.dataset.theme || getPreference();
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      const stored = (() => {
+        try {
+          return localStorage.getItem(storageKey);
+        } catch (error) {
+          return null;
+        }
+      })();
+      if (stored === null) {
+        applyTheme(event.matches ? 'light' : 'dark');
+      }
+    });
+  }
+</script>

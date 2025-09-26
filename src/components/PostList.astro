@@ -11,42 +11,45 @@ const { posts } = Astro.props;
 ---
 
 <section class="posts" id="posts">
-  {posts.map((post, index) => (
-    <a class="post-card surface-card" href={`/blog/${post.id}/`}>
-      <div class:list={[
-        'media',
-        { 'media--reverse': index % 2 === 1 }
-      ]}>
-        {post.data.heroImage ? (
-          <Image
-            class="media__image"
-            width={520}
-            height={320}
-            src={post.data.heroImage}
-            alt={post.data.title}
-            loading={index > 2 ? 'lazy' : 'eager'}
-          />
-        ) : (
-          <div class="media__placeholder" aria-hidden="true" />
-        )}
-      </div>
-      <div class="content">
-        <span class="card-kicker">Artículo</span>
-        <p class="date">
-          <FormattedDate date={post.data.pubDate} />
-        </p>
-        <h3>{post.data.title}</h3>
-        {post.data.description && <p class="excerpt">{post.data.description}</p>}
-        {post.data.tags && (
-          <div class="tags">
-            {post.data.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
+  {posts.map((post, index) => {
+    const safeSlug = (post.slug || post.id || `post-${index}`).toString();
+    const anchorId = `post-${safeSlug.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`;
+    return (
+      <article class="post-card surface-card" aria-labelledby={anchorId}>
+        <a class="post-link" href={`/blog/${post.id}/`}>
+          <div class:list={['media', { 'media--reverse': index % 2 === 1 }]}>
+            {post.data.heroImage ? (
+              <Image
+                class="media__image"
+                width={520}
+                height={320}
+                src={post.data.heroImage}
+                alt={post.data.title}
+                loading={index > 2 ? 'lazy' : 'eager'}
+              />
+            ) : (
+              <div class="media__placeholder" aria-hidden="true" />
+            )}
           </div>
-        )}
-      </div>
-    </a>
-  ))}
+          <div class="content">
+            <span class="card-kicker">Artículo</span>
+            <p class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+            <h3 id={anchorId}>{post.data.title}</h3>
+            {post.data.description && <p class="excerpt">{post.data.description}</p>}
+            {post.data.tags && (
+              <div class="tags" aria-label="Etiquetas">
+                {post.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </a>
+      </article>
+    );
+  })}
 </section>
 
 <style>
@@ -57,22 +60,31 @@ const { posts } = Astro.props;
   }
 
   .post-card {
+    padding: clamp(1.8rem, 3vw, 2.6rem);
+    background: var(--surface-card-bg);
+    border: 1px solid var(--surface-card-border);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+  }
+
+  .post-link {
     display: grid;
     grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
     gap: 2.5rem;
-    padding: clamp(1.8rem, 3vw, 2.6rem);
-    text-decoration: none;
     color: inherit;
-    position: relative;
-    background: linear-gradient(135deg, rgba(242, 131, 125, 0.08), rgba(34, 24, 22, 0.95));
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
-    border: 1px solid var(--surface-border);
+    text-decoration: none;
+    min-height: 100%;
   }
 
-  .post-card:hover {
+  .post-card:hover,
+  .post-card:focus-within {
     transform: translateY(-6px);
     box-shadow: 0 30px 65px rgba(0, 0, 0, 0.55);
-    border-color: rgba(255, 153, 140, 0.55);
+    border-color: var(--surface-card-hover-border);
+  }
+
+  .post-link:focus-visible,
+  .post-link:hover {
+    color: inherit;
   }
 
   .media {
@@ -100,7 +112,7 @@ const { posts } = Astro.props;
     background:
       radial-gradient(circle at 25% 25%, rgba(255, 189, 174, 0.35), transparent 65%),
       var(--bg-muted);
-    border: 1px dashed rgba(255, 189, 174, 0.4);
+    border: 1px dashed var(--surface-card-border);
   }
 
   .content {
@@ -114,24 +126,24 @@ const { posts } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 6px;
     font-size: 0.8rem;
-    color: rgba(255, 210, 200, 0.55);
+    color: rgba(var(--text), 0.6);
   }
 
   .date {
     margin: 0;
-    color: rgba(255, 232, 223, 0.75);
+    color: rgba(var(--text), 0.7);
     font-size: 0.95rem;
   }
 
   h3 {
-    color: #ffe0d6;
+    color: var(--accent-strong);
     margin: 0;
     line-height: 1.2;
   }
 
   .excerpt {
     margin: 0;
-    color: rgba(255, 232, 223, 0.85);
+    color: rgba(var(--text), 0.85);
   }
 
   .tags {
@@ -143,18 +155,18 @@ const { posts } = Astro.props;
   .tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.85rem;
+    padding: 0.4rem 0.9rem;
     border-radius: 999px;
-    background: rgba(242, 131, 125, 0.14);
-    color: rgba(255, 221, 213, 0.9);
+    background: var(--accent-soft);
+    color: var(--accent-strong);
     font-size: 0.75rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 198, 189, 0.25);
+    border: 1px solid var(--surface-card-border);
   }
 
   @media (max-width: 960px) {
-    .post-card {
+    .post-link {
       grid-template-columns: 1fr;
       gap: 1.75rem;
     }
