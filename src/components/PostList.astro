@@ -14,16 +14,18 @@ const { posts } = Astro.props;
   {posts.map((post, index) => {
     const safeSlug = (post.slug || post.id || `post-${index}`).toString();
     const anchorId = `post-${safeSlug.replace(/[^a-z0-9]/gi, '-').toLowerCase()}`;
+    const previewImage = post.data.heroImage ?? post.data.banner;
+
     return (
       <article class="post-card surface-card" aria-labelledby={anchorId}>
         <a class="post-link" href={`/blog/${post.id}/`}>
           <div class:list={['media', { 'media--reverse': index % 2 === 1 }]}>
-            {post.data.heroImage ? (
+            {previewImage ? (
               <Image
                 class="media__image"
                 width={520}
                 height={320}
-                src={post.data.heroImage}
+                src={previewImage}
                 alt={post.data.title}
                 loading={index > 2 ? 'lazy' : 'eager'}
               />

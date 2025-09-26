@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import BackToTop from '../components/BackToTop.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION } from '../consts';
+import portraitImg from './yo.png';
 ---
 
 <!doctype html>
@@ -26,8 +27,17 @@ import { SITE_DESCRIPTION } from '../consts';
             He liderado proyectos que combinan integraciones complejas, APIs, arquitecturas escalables y experiencias conversacionales.
             Me motiva entender el negocio, optimizar procesos y llevar las ideas a producción con calidad y velocidad.
           </p>
+          <p class="lead">
+            Tengo la mente abierta a nuevas tecnologías y metodologías, por ejemplo low-code, no-code y AI (para mvp), y escalar estas soluciones luego de validarlas.
+            Disfruto participar en comunidades técnicas, compartir conocimiento y aprender de otros profesionales.
+          </p>
         </div>
-        <div class="portrait" aria-hidden="true">Tu foto aquí</div>
+        <Image
+          class="portrait"
+          src={portraitImg}
+          alt="Retrato de Jose Rafael Altamar Molina"
+          loading="lazy"
+        />
       </section>
 
       <section class="timeline surface-card p-4">
@@ -35,11 +45,11 @@ import { SITE_DESCRIPTION } from '../consts';
         <ul>
           <li>
             <span class="title">Diseño y desarrollo de aplicaciones web y móviles</span>
-            <p>Experiencia construyendo frontends modernos con frameworks como Vue, Angular e Ionic, conectados a APIs robustas.</p>
+            <p>Experiencia construyendo frontends modernos con frameworks como Vue, Angular, React, React Native e Ionic, conectados a APIs robustas.</p>
           </li>
           <li>
             <span class="title">Automatización y workflows inteligentes</span>
-            <p>Implementación de flujos con n8n, integración con mensajería (WhatsApp, Evolution API) y uso de IA para potenciar procesos.</p>
+            <p>Implementación de flujos con n8n, integración con mensajería (WhatsApp, Evolution API, API oficial de Meta) y uso de IA para potenciar procesos.</p>
           </li>
           <li>
             <span class="title">Backend y DevOps pragmático</span>
@@ -115,14 +125,9 @@ import { SITE_DESCRIPTION } from '../consts';
     width: 100%;
     aspect-ratio: 3 / 4;
     border-radius: 28px;
-    border: 2px dashed var(--surface-card-border);
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: rgba(var(--text), 0.65);
-    text-transform: uppercase;
-    background: var(--surface-card-bg);
+    border: 2px solid var(--surface-card-border);
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
   }
 
   .timeline {
