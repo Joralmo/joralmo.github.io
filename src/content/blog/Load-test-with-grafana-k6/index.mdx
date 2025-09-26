@@ -53,7 +53,7 @@ func main() {
 
 Esto solo para probar que funciona, ejecutamos en consola `go run main.go` y vamos al navegador en <a href="http://localhost:3000" target="_blank">localhost:3000</a> y vemos que nos devuelve el mensaje "Hello, World!".
 
-<img src="./localhost.png" alt="Imagen de prueba inicial" style="width: 100%;">
+<img src="./localhost.png" alt="Imagen de prueba inicial" style="width: 100%;" />
 
 Para colocar mas lógica a nuestra api agregaremos un nuevo endpoint que nos retornará un listado de usuarios generados con <a href="https://pkg.go.dev/github.com/bxcodec/faker/v3#section-readme" target="_blank">Faker</a> (un paquete que genera data aleatoria) y en este caso la generará basada en un modelo de usuarios que crearemos, primero instalamos el paquete, desde la consola ejecutamos:
 
@@ -250,8 +250,8 @@ Solo para hacer el tutorial mas interesante (para mí xD) publicaremos esta pequ
 heroku login
 ```
 Esto abre un navegador y te permite ingresar a heroku
-<img src="./heroku_login_navigator.png" alt="Imagen heroku login navegador" style="width: 100%;">
-<img src="./heroku_login_shell.png" alt="Imagen heroku login consola" style="width: 100%;">
+<img src="./heroku_login_navigator.png" alt="Imagen heroku login navegador" style="width: 100%;" />
+<img src="./heroku_login_shell.png" alt="Imagen heroku login consola" style="width: 100%;" />
 
 Luego ejecutar el comando:
 
@@ -260,11 +260,11 @@ heroku create load-test-api-jp
 ```
 > El nombre de la aplicación puede no estar disponible, pueden intentar con otro nombre
 
-<img src="./result_heroku_create.png" alt="Imagen heroku crear app" style="width: 100%;">
+<img src="./result_heroku_create.png" alt="Imagen heroku crear app" style="width: 100%;" />
 
 Antes de hacer deploy en el archivo go.mod le especificaremos a heroku que versión de go va a utilizar para evitar errores al desplegar, en el archivo go.mod al final añadimos `// +heroku goVersion go1.18`, quedaría así:
 
-<img src="./go_mod_file.png" alt="Imagen go.mod" style="width: 100%;">
+<img src="./go_mod_file.png" alt="Imagen go.mod" style="width: 100%;" />
 
 Y ahora solo para poder hacer deploy a heroku, iniciaremos un proyecto de git
 
@@ -277,11 +277,11 @@ git push heroku master
 ```
 Esto iniciará el deploy y al final nos mostrará la url de nuestra aplicación ya desplegada
 
-<img src="./result_heroku_deploy.png" alt="Imagen heroku deploy" style="width: 100%;">
+<img src="./result_heroku_deploy.png" alt="Imagen heroku deploy" style="width: 100%;" />
 
 si abrimos en el navegador nos mostrará el resultado que configuramos para el endpoint raíz
 
-<img src="./heroku_app_navegador.png" alt="Imagen heroku url" style="width: 100%;">
+<img src="./heroku_app_navegador.png" alt="Imagen heroku url" style="width: 100%;" />
 
 Listo, una vez desplegada la aplicación empezamos con la parte de las pruebas por medio de k6, pero empecemos definiendo primero que es, <a href="https://k6.io/docs/es/#:~:text=%C2%BFQu%C3%A9%20es%20k6%3F,regresiones%20y%20errores%20m%C3%A1s%20tempranamente." target="_blank">la página oficial de k6 lo define así</a>:
 > Grafana k6 es una herramienta de pruebas de carga de código libre que hace fácil a equipos de software testear el rendimiento de sus aplicaciones.
@@ -292,10 +292,10 @@ Lo primero será instalar el cli k6, podemos ver <a href="https://k6.io/docs/es/
 Una vez instalado el cli, veremos la forma más rápida de ejecutar una prueba rápida de k6 utilizando un paquete de npm llamado <a href="https://www.npmjs.com/package/@apideck/postman-to-k6" target="_blank">postman-to-k6</a> este convierte una colección existente de postman a un script de k6 para correrlo como prueba de carga, lo primero será abrir postman, crear una colección nueva y configurar un llamado a nuestro endpoint de la api anteriormente construida
 
 Nos logeamos y copiamos el token de respuesta
-<img src="./postman_collection_k6.png" alt="Imagen postman login" style="width: 100%;">
+<img src="./postman_collection_k6.png" alt="Imagen postman login" style="width: 100%;" />
 
 Hacemos una petición de usuarios enviando el token anterior
-<img src="./postman_users_get.png" alt="Imagen postman get users" style="width: 100%;">
+<img src="./postman_users_get.png" alt="Imagen postman get users" style="width: 100%;" />
 
 Le añadí un test al endpoint para ver si respondió status 200 y si recibió data
 
@@ -305,10 +305,10 @@ pm.test("Status code is 200, and have data", function () {
     pm.expect(pm.response.json().length).to.gt(0)
 });
 ```
-<img src="./postman_users_get_test.png" alt="Imagen postman get users test" style="width: 100%;">
+<img src="./postman_users_get_test.png" alt="Imagen postman get users test" style="width: 100%;" />
 
 Exportamos la colección
-<img src="./export_postman_collection.png" alt="Imagen postman export" style="width: 100%;">
+<img src="./export_postman_collection.png" alt="Imagen postman export" style="width: 100%;" />
 
 Desde una consola nos situamos en el directorio donde exportamos la colección e instalamos globalmente el paquete de npm postman-to-k6
 
@@ -324,7 +324,7 @@ postman-to-k6 k6Tutorial.postman_collection.json -o k6-script.js
 
 Esto tendrá como resultado un archivo javascript y un folder "libs" donde hay una serie de archivos que utilizará k6 para ejecutar la prueba de carga sobre nuestra colección
 
-<img src="./result_postman_to_k6.png" alt="Imagen postman to k6" style="width: 100%;">
+<img src="./result_postman_to_k6.png" alt="Imagen postman to k6" style="width: 100%;" />
 
 Por ultimo ejecutamos la prueba usando el cli de k6 con el siguiente comando
 
@@ -334,7 +334,7 @@ k6 run --vus 200 --duration 30s k6-script.js
 
 Este comando ejecutará una prueba de carga con 200 usuarios virtuales con una duración de 30 segundos (siempre se ejecuta durante unos segundos mas, mientras configura la ejecución de la prueba), y nos mostrará el resultado de la prueba
 
-<img src="./k6_run_postman_collection.png" alt="Imagen k6 run" style="width: 100%;">
+<img src="./k6_run_postman_collection.png" alt="Imagen k6 run" style="width: 100%;" />
 
 En la salida podemos ver los resultados de la prueba ejecutada e incluso del test que definimos en postman, explicaré lo que entiendo de los mas relevantes del listado
 
@@ -505,7 +505,7 @@ xk6 build v0.36.0 --with github.com/avitalique/xk6-file@latest
 
 Los anteriores comandos instalarán la extensión file y construirán un binario que será el que usaremos para correr la prueba y usar la extension, una vez corrido los comandos dará una salida como esta
 
-<img src="./install_k6_file.png" alt="resultado xk6" style="width: 100%;">
+<img src="./install_k6_file.png" alt="resultado xk6" style="width: 100%;" />
 
 Luego nuestro archivo seed.ts importamos la extensión instalada, el paquete http que viene dentro de k6, declararemos una variable para el password que definimos, y recorreremos uno por uno los usuarios para obtener su token, lo guardamos en un array y al final esto lo guardamos en un nuevo archivo json, quedará con el siguiente contenido:
 
@@ -554,7 +554,7 @@ npm run seed
 ```
 esto generará el archivo resultData.json con los tokens generados por cada usuario, adicionalmente podríamos guardar cualquier otra info necesaria para posteriormente usarla en la prueba
 
-<img src="./result_data_json.png" alt="resultado seed" style="width: 100%;">
+<img src="./result_data_json.png" alt="resultado seed" style="width: 100%;" />
 
 Como resultado tendríamos un archivo listo para ahora proceder a ejecutar nuestra prueba, por lo que procedemos ahora a crear un archivo para ejecutar el test.
 
@@ -599,7 +599,7 @@ Ya en el package.json colocamos previamente el script de build y el de test, per
 
 > test: './src/test.ts',
 
-<img src="./entry_webpack_files.png" alt="webpack config" style="width: 100%;">
+<img src="./entry_webpack_files.png" alt="webpack config" style="width: 100%;" />
 
 Ahora podemos correr nuestra prueba con el comando
 ```bash
@@ -607,8 +607,8 @@ npm run test
 ```
 Esto empezaría a ejecutar nuestro test
 
-<img src="./first_step_run_test.png" alt="resultado test" style="width: 100%;">
-<img src="./second_step_run_test.png" alt="resultado test" style="width: 100%;">
+<img src="./first_step_run_test.png" alt="resultado test" style="width: 100%;" />
+<img src="./second_step_run_test.png" alt="resultado test" style="width: 100%;" />
 
 > El warning que aparece es porque mi maquina no soporta la cantidad de usuarios virtuales que definí xD
 
