@@ -1,0 +1,22 @@
+---
+const { src, title = 'Video playback', poster } = Astro.props;
+---
+<figure class="video-wrapper">
+  <video controls preload="metadata" poster={poster} aria-label={title} title={title}>
+    <source src={src} type="video/mp4" />
+    Tu navegador no soporta video HTML5.
+  </video>
+</figure>
+
+<style>
+  .video-wrapper {
+    margin: 2rem 0;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+</style>

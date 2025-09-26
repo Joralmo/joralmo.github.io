@@ -1,0 +1,221 @@
+---
+import { Image } from 'astro:assets';
+import BackToTop from '../components/BackToTop.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import portraitImg from './yo.png';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title="Sobre JoralmoPro" description="Conoce a Jose Rafael Altamar Molina (JoralmoPro)." />
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <section class="hero">
+        <div class="bio">
+          <p class="kicker">JoralmoPro</p>
+          <h1>Jose Rafael Altamar Molina</h1>
+          <p class="lead">
+            Ingeniero de Sistemas con más de seis años de experiencia desarrollando soluciones digitales end-to-end.
+            Me muevo con naturalidad entre frontend, backend y automatización, siempre con foco en el impacto real para los usuarios.
+          </p>
+          <p class="lead">
+            He liderado proyectos que combinan integraciones complejas, APIs, arquitecturas escalables y experiencias conversacionales.
+            Me motiva entender el negocio, optimizar procesos y llevar las ideas a producción con calidad y velocidad.
+          </p>
+          <p class="lead">
+            Tengo la mente abierta a nuevas tecnologías y metodologías, por ejemplo low-code, no-code y AI (para mvp), y escalar estas soluciones luego de validarlas.
+            Disfruto participar en comunidades técnicas, compartir conocimiento y aprender de otros profesionales.
+          </p>
+        </div>
+        <Image
+          class="portrait"
+          src={portraitImg}
+          alt="Retrato de Jose Rafael Altamar Molina"
+          loading="lazy"
+        />
+      </section>
+
+      <section class="timeline surface-card p-4">
+        <h2>Qué puedo aportar</h2>
+        <ul>
+          <li>
+            <span class="title">Diseño y desarrollo de aplicaciones web y móviles</span>
+            <p>Experiencia construyendo frontends modernos con frameworks como Vue, Angular, React, React Native e Ionic, conectados a APIs robustas.</p>
+          </li>
+          <li>
+            <span class="title">Automatización y workflows inteligentes</span>
+            <p>Implementación de flujos con n8n, integración con mensajería (WhatsApp, Evolution API, API oficial de Meta) y uso de IA para potenciar procesos.</p>
+          </li>
+          <li>
+            <span class="title">Backend y DevOps pragmático</span>
+            <p>Servicios en Go, Node.js y Rails; despliegues con containers, pipelines CI/CD y hosting gestionado (Railway, Vercel, etc.).</p>
+          </li>
+          <li>
+            <span class="title">Acompañamiento técnico</span>
+            <p>Mentoría a equipos, documentación clara y coordinación con stakeholders para asegurar entregas alineadas al negocio.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="links surface-card">
+        <h2>Conecta conmigo</h2>
+        <p class="hint">Escríbeme para colaborar, construir productos o compartir ideas.</p>
+        <div class="link-grid">
+          <a class="link" href="https://www.linkedin.com/in/JoralmoPro/" target="_blank" rel="noreferrer">
+            <span class="label">LinkedIn</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+          <a class="link" href="https://www.instagram.com/JoralmoPro/" target="_blank" rel="noreferrer">
+            <span class="label">Instagram</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+          <a class="link" href="https://www.github.com/Joralmo" target="_blank" rel="noreferrer">
+            <span class="label">GitHub</span>
+            <span class="handle">@Joralmo</span>
+          </a>
+          <a class="link" href="https://www.twitter.com/JoralmoPro" target="_blank" rel="noreferrer">
+            <span class="label">Twitter / X</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <Footer />
+    <BackToTop />
+  </body>
+</html>
+
+<style>
+  main {
+    width: min(1100px, calc(100% - 3rem));
+    margin: 0 auto;
+    padding: 5rem 0 6rem;
+    display: grid;
+    gap: 4.5rem;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .bio {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+  }
+
+  .lead {
+    color: rgba(var(--text), 0.78);
+    margin: 0;
+  }
+
+  .portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 28px;
+    border: 2px solid var(--surface-card-border);
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .timeline {
+    padding: clamp(2.2rem, 4vw, 3rem);
+  }
+
+  .timeline ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .timeline .title {
+    font-weight: 700;
+    color: var(--accent-strong);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline p {
+    margin: 0;
+    color: rgba(var(--text), 0.78);
+  }
+
+  .links {
+    padding: clamp(2.2rem, 4vw, 3rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hint {
+    margin: 0;
+    color: rgba(var(--text), 0.68);
+  }
+
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .link {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--surface-card-border);
+    text-decoration: none;
+    color: rgba(var(--text), 0.85);
+    background: var(--surface-card-bg);
+    transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .link:hover {
+    transform: translateY(-4px);
+    border-color: var(--surface-card-hover-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .label {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(var(--text), 0.6);
+  }
+
+  .handle {
+    font-size: 1.15rem;
+    color: var(--accent-strong);
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 720px) {
+    main {
+      width: calc(100% - 2rem);
+      padding: 3rem 0 4rem;
+    }
+  }
+</style>

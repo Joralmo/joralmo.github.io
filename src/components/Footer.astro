@@ -1,0 +1,71 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const today = new Date();
+---
+
+<footer role="contentinfo">
+	<div class="inner">
+		<div class="brand-block">
+			<p class="label">{SITE_TITLE}</p>
+			<p class="desc">{SITE_DESCRIPTION}</p>
+		</div>
+		<div class="contact-block">
+			<p class="label">Contacto</p>
+			<a href="tel:+573002892012">+57 (300) 289-2012</a>
+			<a href="mailto:info@noemec.net">info@noemec.net</a>
+		</div>
+	</div>
+	<div class="legal">
+		&copy; {today.getFullYear()} {SITE_TITLE}. Todos los derechos reservados.
+	</div>
+</footer>
+<style>
+	footer {
+		background: var(--header-bg);
+		border-top: 1px solid var(--surface-card-border);
+		padding: 4rem 0 3rem;
+		margin-top: 6rem;
+	}
+	.inner {
+		width: min(1100px, calc(100% - 3rem));
+		margin: 0 auto 2rem auto;
+		display: flex;
+		gap: 3rem;
+		flex-wrap: wrap;
+	}
+	.label {
+		font-weight: 700;
+		letter-spacing: 4px;
+		text-transform: uppercase;
+		color: rgba(var(--text), 0.62);
+		margin-bottom: 1rem;
+	}
+	.desc {
+		max-width: 28rem;
+		margin: 0;
+		color: rgba(var(--text), 0.78);
+	}
+	.contact-block a {
+		display: block;
+		margin-bottom: 0.4rem;
+		color: var(--link);
+		text-decoration: none;
+	}
+	.contact-block a:hover {
+		color: var(--accent-strong);
+	}
+	.legal {
+		width: min(1100px, calc(100% - 3rem));
+		margin: 0 auto;
+		font-size: 0.85rem;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: rgba(var(--text), 0.55);
+	}
+	@media (max-width: 720px) {
+		footer {
+			padding: 3rem 0 2.5rem;
+		}
+	}
+</style>
