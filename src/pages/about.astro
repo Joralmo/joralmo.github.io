@@ -1,63 +1,214 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title="Sobre JoralmoPro" description="Conoce a Jose Rafael Altamar Molina (JoralmoPro)." />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <div class="bio">
+          <p class="kicker">JoralmoPro</p>
+          <h1>Jose Rafael Altamar Molina</h1>
+          <p class="lead">
+            Ingeniero de Sistemas con más de seis años de experiencia desarrollando soluciones digitales end-to-end.
+            Me muevo con naturalidad entre frontend, backend y automatización, siempre con foco en el impacto real para los usuarios.
+          </p>
+          <p class="lead">
+            He liderado proyectos que combinan integraciones complejas, APIs, arquitecturas escalables y experiencias conversacionales.
+            Me motiva entender el negocio, optimizar procesos y llevar las ideas a producción con calidad y velocidad.
+          </p>
+        </div>
+        <div class="portrait" aria-hidden="true">Tu foto aquí</div>
+      </section>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+      <section class="timeline surface-card p-4">
+        <h2>Qué puedo aportar</h2>
+        <ul>
+          <li>
+            <span class="title">Diseño y desarrollo de aplicaciones web y móviles</span>
+            <p>Experiencia construyendo frontends modernos con frameworks como Vue, Angular e Ionic, conectados a APIs robustas.</p>
+          </li>
+          <li>
+            <span class="title">Automatización y workflows inteligentes</span>
+            <p>Implementación de flujos con n8n, integración con mensajería (WhatsApp, Evolution API) y uso de IA para potenciar procesos.</p>
+          </li>
+          <li>
+            <span class="title">Backend y DevOps pragmático</span>
+            <p>Servicios en Go, Node.js y Rails; despliegues con containers, pipelines CI/CD y hosting gestionado (Railway, Vercel, etc.).</p>
+          </li>
+          <li>
+            <span class="title">Acompañamiento técnico</span>
+            <p>Mentoría a equipos, documentación clara y coordinación con stakeholders para asegurar entregas alineadas al negocio.</p>
+          </li>
+        </ul>
+      </section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+      <section class="links surface-card">
+        <h2>Conecta conmigo</h2>
+        <p class="hint">Escríbeme para colaborar, construir productos o compartir ideas.</p>
+        <div class="link-grid">
+          <a class="link" href="https://www.linkedin.com/in/JoralmoPro/" target="_blank" rel="noreferrer">
+            <span class="label">LinkedIn</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+          <a class="link" href="https://www.instagram.com/JoralmoPro/" target="_blank" rel="noreferrer">
+            <span class="label">Instagram</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+          <a class="link" href="https://www.github.com/Joralmo" target="_blank" rel="noreferrer">
+            <span class="label">GitHub</span>
+            <span class="handle">@Joralmo</span>
+          </a>
+          <a class="link" href="https://www.twitter.com/JoralmoPro" target="_blank" rel="noreferrer">
+            <span class="label">Twitter / X</span>
+            <span class="handle">@JoralmoPro</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+<style>
+  main {
+    width: min(1100px, calc(100% - 3rem));
+    margin: 0 auto;
+    padding: 5rem 0 6rem;
+    display: grid;
+    gap: 4.5rem;
+  }
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .bio {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+  }
+
+  .lead {
+    color: rgba(255, 232, 223, 0.8);
+    margin: 0;
+  }
+
+  .portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 28px;
+    border: 2px dashed rgba(255, 198, 189, 0.4);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255, 210, 200, 0.6);
+    text-transform: uppercase;
+    background: rgba(34, 24, 22, 0.75);
+  }
+
+  .timeline {
+    padding: clamp(2.2rem, 4vw, 3rem);
+  }
+
+  .timeline ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .timeline .title {
+    font-weight: 700;
+    color: #ffe3da;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline p {
+    margin: 0;
+    color: rgba(255, 232, 223, 0.75);
+  }
+
+  .links {
+    padding: clamp(2.2rem, 4vw, 3rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hint {
+    margin: 0;
+    color: rgba(255, 232, 223, 0.7);
+  }
+
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .link {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--surface-border);
+    text-decoration: none;
+    color: rgba(255, 231, 223, 0.85);
+    background: rgba(32, 23, 21, 0.85);
+    transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .link:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 153, 140, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .label {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 210, 200, 0.65);
+  }
+
+  .handle {
+    font-size: 1.15rem;
+    color: #ffe1d7;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 720px) {
+    main {
+      width: calc(100% - 2rem);
+      padding: 3rem 0 4rem;
+    }
+  }
+</style>

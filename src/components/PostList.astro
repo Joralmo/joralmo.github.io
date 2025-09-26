@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="posts" id="posts">
+  {posts.map((post, index) => (
+    <a class="post-card surface-card" href={`/blog/${post.id}/`}>
+      <div class:list={[
+        'media',
+        { 'media--reverse': index % 2 === 1 }
+      ]}>
+        {post.data.heroImage ? (
+          <Image
+            class="media__image"
+            width={520}
+            height={320}
+            src={post.data.heroImage}
+            alt={post.data.title}
+            loading={index > 2 ? 'lazy' : 'eager'}
+          />
+        ) : (
+          <div class="media__placeholder" aria-hidden="true" />
+        )}
+      </div>
+      <div class="content">
+        <span class="card-kicker">Artículo</span>
+        <p class="date">
+          <FormattedDate date={post.data.pubDate} />
+        </p>
+        <h3>{post.data.title}</h3>
+        {post.data.description && <p class="excerpt">{post.data.description}</p>}
+        {post.data.tags && (
+          <div class="tags">
+            {post.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  ))}
+</section>
+
+<style>
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .post-card {
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: clamp(1.8rem, 3vw, 2.6rem);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    background: linear-gradient(135deg, rgba(242, 131, 125, 0.08), rgba(34, 24, 22, 0.95));
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+    border: 1px solid var(--surface-border);
+  }
+
+  .post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 65px rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 153, 140, 0.55);
+  }
+
+  .media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media--reverse {
+    order: 2;
+  }
+
+  .media__image {
+    width: 100%;
+    height: auto;
+    border-radius: 22px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .media__placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 25% 25%, rgba(255, 189, 174, 0.35), transparent 65%),
+      var(--bg-muted);
+    border: 1px dashed rgba(255, 189, 174, 0.4);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .card-kicker {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 0.8rem;
+    color: rgba(255, 210, 200, 0.55);
+  }
+
+  .date {
+    margin: 0;
+    color: rgba(255, 232, 223, 0.75);
+    font-size: 0.95rem;
+  }
+
+  h3 {
+    color: #ffe0d6;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .excerpt {
+    margin: 0;
+    color: rgba(255, 232, 223, 0.85);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(242, 131, 125, 0.14);
+    color: rgba(255, 221, 213, 0.9);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 198, 189, 0.25);
+  }
+
+  @media (max-width: 960px) {
+    .post-card {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .media--reverse {
+      order: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .post-card {
+      padding: 1.6rem;
+    }
+  }
+</style>
